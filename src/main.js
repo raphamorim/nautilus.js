@@ -1,6 +1,8 @@
 function loadScript(config, currentQueue) {
   var origins = config.origins;
-  var path = config.path;
+  var pathIsArray = _.isArray(config.path);
+  var paths = pathIsArray ? config.path : [];
+  var path = pathIsArray ? config.path[0] : config.path;
   var scr = document.createElement('script');
   var useOrigins = origins.length > 0 && !_.isAbsoluteURL(path);
 
@@ -31,6 +33,12 @@ function loadScript(config, currentQueue) {
       loadScript({
         origins: origins.slice(1),
         path: path,
+      }, currentQueue);
+    }
+    if (paths.length > 1) {
+      loadScript({
+        origins: origins,
+        path: paths.slice(1),
       }, currentQueue);
     }
   }
