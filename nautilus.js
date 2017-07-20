@@ -72,13 +72,14 @@ function loadScript(config, currentQueue) {
   var path = pathIsArray ? config.path[0] : config.path;
   var scr = document.createElement('script');
   var useOrigins = origins.length > 0 && !_.isAbsoluteURL(path);
+  var src = useOrigins ? origins[0] + path : path;
 
   scr.type = 'text/javascript';
   scr.onload = handleLoad;
   scr.async = true;
   scr.onreadystatechange = handleReadyStateChange;
   scr.onerror = handleError;
-  scr.src = useOrigins ? origins[0] + path : path;
+  scr.src = src;
   document.head.appendChild(scr);
 
   function handleLoad() {
@@ -94,7 +95,7 @@ function loadScript(config, currentQueue) {
   function handleError() {
     console.warn(
       '[nautilus] occurred an error while fetching',
-      path
+      src
     );
     if (useOrigins) {
       loadScript({
