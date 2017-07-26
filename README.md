@@ -92,6 +92,23 @@ nautilus.config({
 });
 ```
 
+Or you can pass an array, now it will try to download the script once in order, falling back to the next one if fails, like this:
+
+```js
+nautilus.config({
+  paths: { 
+    jquery: [
+      'https://public.cdn.com/libs/jquery.min.js',
+      'https://private.cdn.com/libs/jquery.min.js',
+    ],
+    waterfall: [
+      'http://cdnjs.cloudflare.com/ajax/libs/waterfall.js/1.0.2/waterfall.min.js',
+      'http://www.mydomain.com/js/1.0.2/waterfall.min.js'
+    ]
+  }
+});
+```
+
 To start scripts asynchronous load:
 
 ```js
