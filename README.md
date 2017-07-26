@@ -92,7 +92,7 @@ nautilus.config({
 });
 ```
 
-Or you can pass an array, now it will try to download the script once in order, falling back to the next one if fails, like this:
+Or you can pass an array, now it will try to download the script once in order, falling back to the next URL if fails, like this:
 
 ```js
 nautilus.config({
