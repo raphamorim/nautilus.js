@@ -1,5 +1,4 @@
-(function(root, factory) {
-  root.nautilus = factory;
+(function(root, Nautilus) {
+  root.nautilus = new Nautilus();
 }(this, function Nautilus() {
   'use strict';
-  if (!(this instanceof Nautilus)) return new Nautilus();
