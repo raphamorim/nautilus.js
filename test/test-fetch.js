@@ -57,6 +57,7 @@ describe('Fetch', function() {
             });
         });
     });
+
   describe('origins config parameter', function () {
     context('test each origin for relative URLs', function () {
       it('should try to load relative URLs using each origin', function (done) {
@@ -77,6 +78,51 @@ describe('Fetch', function() {
           expect(window.dep1).to.be.equal("dep1");
           expect(scriptIsPresent('fixtures/dep0.js')).to.be.equal(true);
           expect(scriptIsPresent('fixtures/dep1.js')).to.be.equal(true);
+          done();
+        });
+      });
+    });
+  });
+
+  describe('multiple URLs for same script', function() {
+    context('try to load with fallbacks', function() {
+      it('should load script in last try', function(done) {
+        window.dep0 = undefined;
+        nautilus.config({
+          paths: {
+            dep0: [
+              'nope/dep0.js',
+              'not/here/dep0.js',
+              'fixtures/dep0.js',
+            ],
+          },
+        });
+        nautilus(['dep0'], function() {
+          expect(window.dep0).to.be.equal("dep0");
+          expect(scriptIsPresent('fixtures/dep0.js')).to.be.equal(true);
+          done();
+        });
+      });
+    });
+  });
+
+  describe('multiple URLs for same script and origins', function() {
+    context('try to load with fallbacks', function() {
+      it('should load script in last try', function(done) {
+        window.dep0 = undefined;
+        nautilus.config({
+          origins: ['randomplace', 'fixtures'],
+          paths: {
+            dep0: [
+              '/nope/dep0.js',
+              '/not/here/dep0.js',
+              '/dep0.js',
+            ],
+          }
+        });
+        nautilus(['dep0'], function() {
+          expect(window.dep0).to.be.equal("dep0");
+          expect(scriptIsPresent('fixtures/dep0.js')).to.be.equal(true);
           done();
         });
       });
