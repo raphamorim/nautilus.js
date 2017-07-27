@@ -1,6 +1,8 @@
 (function(root, factory) {
   root.nautilus = factory;
-}(this, function nautilus() {
+}(this, function Nautilus() {
+  'use strict';
+  if (!(this instanceof Nautilus)) return new Nautilus();
 
 var self = this,
   hasOwn = Object.prototype.hasOwnProperty;
