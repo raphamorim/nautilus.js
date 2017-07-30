@@ -34,7 +34,6 @@
     "grunt-contrib-uglify": "3.0.1",
     "grunt-contrib-watch": "1.0.0",
     "grunt-run": "0.7.0",
-    "gulp": "3.9.1",
     "istanbul": "0.4.5",
     "mocha": "3.4.2",
     "mocha-phantomjs": "4.1.0"
