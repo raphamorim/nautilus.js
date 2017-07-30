@@ -1,6 +1,6 @@
 # Nautilus.js
 
-> Async JavaScript loader & dependency manager in ~1kb (600B gziped)
+> Async CSS/JavaScript loader & dependency manager in ~1kb (600B gziped)
 
 [![Coverage Status](https://coveralls.io/repos/github/raphamorim/nautilus.js/badge.svg?branch=master)](https://coveralls.io/github/raphamorim/nautilus.js?branch=master)
 
@@ -14,6 +14,7 @@ blocks CSS, Images and JavaScript.
 
 
 ```html
+<link href="bootstrap.css">
 <script src="jquery.js"></script>
 <script src="my-jquery-plugin.js"></script>
 <script src="my-app-that-uses-plugin.js"></script>
@@ -46,13 +47,14 @@ loads as non-blocking too, however Nautilus.js doesn't care if it's an anonymous
 <script>
 	nautilus.config({
 		paths: {
+			bootstrap: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css',
 			'jquery': 'libs/jquery.js',
 			'jquery.nanoscroller': 'libs/jquery-nanoscroller.js',
 			'waterfall': 'http://cdnjs.cloudflare.com/ajax/libs/waterfall.js/1.0.2/waterfall.min.js'
 		}
 	});
 
-	nautilus(['jquery', 'waterfall'], ['jquery.nanoscroller'], function() {
+	nautilus(['bootstrap', 'jquery', 'waterfall'], ['jquery.nanoscroller'], function() {
 		console.log($); // function (a,b){return new n.fn.init(a,b)}
 		console.log(typeof($.fn.nanoScroller)); // 'function'
 	});
@@ -61,7 +63,7 @@ loads as non-blocking too, however Nautilus.js doesn't care if it's an anonymous
 
 #### What's the biggest difference about the [current top script loaders](http://www.creativebloq.com/javascript/essential-javascript-top-five-script-loaders-8122862)?
 
-Nautilus can define namespaces to script paths/links and you can manage easily. Besides 7~20x more lighter.
+Nautilus can define namespaces to asset paths/links and you can manage easily. Besides 7~20x more lighter.
 
 ## Getting
 
@@ -92,7 +94,7 @@ nautilus.config({
 });
 ```
 
-Or you can pass an array, now it will try to download the script once in order, falling back to the next URL if fails, like this:
+Or you can pass an array, now it will try to download the asset once in order, falling back to the next URL if fails, like this:
 
 ```js
 nautilus.config({
@@ -109,7 +111,7 @@ nautilus.config({
 });
 ```
 
-To start scripts asynchronous load:
+To asynchronous download the assets:
 
 ```js
 nautilus(['jquery', 'waterfall'], function() {
@@ -128,7 +130,7 @@ nautilus.config({
 nautilus(['jquery']);
 ```
 
-With this it will request the script file in the following URLs:
+With this it will request the jQuery file in the following URLs:
 1. `https://public.cdn.com/libs/jquery.min.js`
 2. `https://private.cdn.com/libs/jquery.min.js`
 3. `https://s3.com/libs/jquery.min.js`
