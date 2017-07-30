@@ -1,6 +1,7 @@
-(function(root, factory) {
-  root.nautilus = factory;
-}(this, function nautilus() {
+(function(root, Nautilus) {
+  root.nautilus = new Nautilus();
+}(this, function Nautilus() {
+  'use strict';
 
 var self = this,
   hasOwn = Object.prototype.hasOwnProperty;
@@ -160,4 +161,4 @@ this.resetConfig = function () {
 };
 
 return _.extends(fetch.bind(this), this);
-}()));
+}));
