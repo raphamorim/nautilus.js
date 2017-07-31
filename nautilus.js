@@ -1,6 +1,7 @@
-(function(root, factory) {
-  root.nautilus = factory;
-}(this, function nautilus() {
+(function(root, Nautilus) {
+  root.nautilus = new Nautilus();
+}(this, function Nautilus() {
+  'use strict';
 
 var self = this,
   hasOwn = Object.prototype.hasOwnProperty;
@@ -70,24 +71,30 @@ function loadScript(config, currentQueue) {
   var pathIsArray = _.isArray(config.path);
   var paths = pathIsArray ? config.path : [];
   var path = pathIsArray ? config.path[0] : config.path;
-  var scr = document.createElement('script');
   var useOrigins = origins.length > 0 && !_.isAbsoluteURL(path);
-  var src = useOrigins ? origins[0] + path : path;
+  var url = useOrigins ? origins[0] + path : path;
+  var isCSS = /\.css$/.test(url);
 
-  scr.type = 'text/javascript';
-  scr.onload = handleLoad;
-  scr.async = true;
-  scr.onreadystatechange = handleReadyStateChange;
-  scr.onerror = handleError;
-  scr.src = src;
-  document.head.appendChild(scr);
+  var element = document.createElement(isCSS ? 'link' : 'script');
+  element.type = isCSS ? 'text/css' : 'text/javascript';
+  element.onload = handleLoad;
+  element.onreadystatechange = handleReadyStateChange;
+  element.onerror = handleError;
+  if (isCSS) {
+    element.rel = 'stylesheet';
+    element.href = url;
+  } else {
+    element.async = true;
+    element.src = url;
+  }
+  document.head.appendChild(element);
 
   function handleLoad() {
     queue.incr(currentQueue);
   }
 
   function handleReadyStateChange() {
-    if (scr.readyState === 'complete') {
+    if (element.readyState === 'complete') {
       handleLoad();
     }
   }
@@ -95,7 +102,7 @@ function loadScript(config, currentQueue) {
   function handleError() {
     console.warn(
       '[nautilus] occurred an error while fetching',
-      src
+      url
     );
     if (useOrigins) {
       loadScript({
@@ -160,4 +167,4 @@ this.resetConfig = function () {
 };
 
 return _.extends(fetch.bind(this), this);
-}()));
+}));

@@ -7,7 +7,7 @@
     "coverage": "./node_modules/.bin/istanbul cover grunt test --report lcovonly -- -R spec",
     "ci": "npm run-script coverage && node ./node_modules/coveralls/bin/coveralls.js < coverage/lcov.info && rm -rf ./coverage",
     "test": "grunt",
-    "test:only": "./node_modules/mocha-phantomjs/bin/mocha-phantomjs test/*.html"
+    "test:only": "phantomjs node_modules/mocha-phantomjs-core/mocha-phantomjs-core.js test/*.html spec '{\"useColors\":true}'"
   },
   "repository": {
     "type": "git",
@@ -37,6 +37,7 @@
     "gulp": "3.9.1",
     "istanbul": "0.4.5",
     "mocha": "3.4.2",
-    "mocha-phantomjs": "4.1.0"
+    "mocha-phantomjs-core": "2.1.2",
+    "phantomjs-prebuilt": "2.1.14"
   }
 }
