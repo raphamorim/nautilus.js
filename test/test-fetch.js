@@ -9,6 +9,20 @@ describe('Fetch', function() {
         return false;
     }
 
+  function stylesheetIsPresent(url) {
+    var stylesheets = Array.prototype.slice.call(document.styleSheets);
+    for (var i = 0; i < stylesheets.length; i++) {
+      if (stylesheets[i].href.indexOf(url) >= 0)
+        return true;
+    }
+
+    return false;
+  }
+
+  afterEach(function () {
+    nautilus.resetConfig();
+  });
+
     describe('asynchronous queue load', function() {
         context('testing one asynchronous request', function() {
             it('should execute callback on success and the scripts on head end', function(done) {
@@ -123,6 +137,18 @@ describe('Fetch', function() {
         nautilus(['dep0'], function() {
           expect(window.dep0).to.be.equal("dep0");
           expect(scriptIsPresent('fixtures/dep0.js')).to.be.equal(true);
+          done();
+        });
+      });
+    });
+  });
+
+  describe('stylesheets', function() {
+    context('try to load CSS', function() {
+      it('should load CSS', function(done) {
+        nautilus(['fixtures/style0.css'], function() {
+          expect(window.getComputedStyle(document.body).content).to.be.equal('style0');
+          expect(stylesheetIsPresent('fixtures/style0.css')).to.be.equal(true);
           done();
         });
       });
