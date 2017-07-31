@@ -1,7 +1,7 @@
 {
   "name": "nautilusjs",
-  "version": "0.0.6",
-  "description": "Async JavaScript loader & dependency manager",
+  "version": "1.0.0",
+  "description": "Async CSS/JavaScript loader & dependency manager in ~1kb",
   "main": "nautilus.js",
   "scripts": {
     "coverage": "./node_modules/.bin/istanbul cover grunt test --report lcovonly -- -R spec",
