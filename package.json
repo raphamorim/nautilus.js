@@ -4,7 +4,7 @@
   "description": "Async JavaScript loader & dependency manager",
   "main": "nautilus.js",
   "scripts": {
-    "coverage": "./node_modules/.bin/istanbul cover grunt test --report lcovonly -- -R spec",
+    "coverage": "./node_modules/.bin/istanbul cover grunt test --report lcovonly -- -R spec --force",
     "ci": "npm run-script coverage && node ./node_modules/coveralls/bin/coveralls.js < coverage/lcov.info && rm -rf ./coverage",
     "test": "grunt",
     "test:only": "phantomjs node_modules/mocha-phantomjs-core/mocha-phantomjs-core.js test/*.html spec '{\"useColors\":true}'"
