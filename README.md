@@ -28,13 +28,13 @@ loads as non-blocking, however one has to use an API definition as AMD or common
 <!-- AMD LOADER EXAMPLE -->
 <script>
 require(['jquery'], function($) {
-    console.log($); // function (a,b){return new n.fn.init(a,b)}
+  console.log($); // function (a,b){return new n.fn.init(a,b)}
 
-    require(['my-jquery-plugin'], function() {
-      /*
-        If jquery plugin has an anonymous define, throw an error: Mismatched anonymous define() module...
-      */
-    });
+  require(['my-jquery-plugin'], function() {
+    /*
+      If jquery plugin has an anonymous define, throw an error: Mismatched anonymous define() module...
+    */
+  });
 });
 </script>
 ```
@@ -98,7 +98,7 @@ Or you can pass an array, now it will try to download the asset once in order, f
 
 ```js
 nautilus.config({
-  paths: { 
+  paths: {
     jquery: [
       'https://public.cdn.com/libs/jquery.min.js',
       'https://private.cdn.com/libs/jquery.min.js',
