@@ -45,19 +45,19 @@ loads as non-blocking too, however Nautilus.js doesn't care if it's an anonymous
 
 ```html
 <script>
-	nautilus.config({
-		paths: {
-			bootstrap: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css',
-			'jquery': 'libs/jquery.js',
-			'jquery.nanoscroller': 'libs/jquery-nanoscroller.js',
-			'waterfall': 'http://cdnjs.cloudflare.com/ajax/libs/waterfall.js/1.0.2/waterfall.min.js'
-		}
-	});
+  nautilus.config({
+    paths: {
+      bootstrap: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css',
+      'jquery': 'libs/jquery.js',
+      'jquery.nanoscroller': 'libs/jquery-nanoscroller.js',
+      'waterfall': 'http://cdnjs.cloudflare.com/ajax/libs/waterfall.js/1.0.2/waterfall.min.js'
+    }
+  });
 
-	nautilus(['bootstrap', 'jquery', 'waterfall'], ['jquery.nanoscroller'], function() {
-		console.log($); // function (a,b){return new n.fn.init(a,b)}
-		console.log(typeof($.fn.nanoScroller)); // 'function'
-	});
+  nautilus(['bootstrap', 'jquery', 'waterfall'], ['jquery.nanoscroller'], function() {
+    console.log($); // function (a,b){return new n.fn.init(a,b)}
+    console.log(typeof($.fn.nanoScroller)); // 'function'
+  });
 </script>
 ```
 
@@ -145,6 +145,6 @@ With this it will request the jQuery file in the following URLs:
 
 ## Credits
 
-Made by [@raphamundi](https://twitter.com/raphamundi) and awesome [contributors](https://github.com/raphamorim/nautilus.js/graphs/contributors)
+Made by [@raphamorims](https://twitter.com/raphamorims) and awesome [contributors](https://github.com/raphamorim/nautilus.js/graphs/contributors)
 
 License: MIT
